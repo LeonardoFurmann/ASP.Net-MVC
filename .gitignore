@@ -1,3 +1,20 @@
+# Arquivos e pastas gerados pelo ambiente de desenvolvimento
+bin/
+obj/
+.vs/
+
+# Arquivos temporários
+*.log
+*.cache
+*.tmp
+
+# Arquivos gerados pelo Visual Studio
+*.suo
+*.cache
+*.sln.docstates
+*.csproj.user
+*.csproj.nuget.cache
+
 # Prerequisites
 *.d
 
@@ -30,3 +47,4 @@
 *.exe
 *.out
 *.app
+*.cache
