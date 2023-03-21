@@ -16,8 +16,6 @@ var connectionString = builder.Configuration.GetConnectionString("DataBase");
 builder.Services.AddEntityFrameworkSqlServer().AddDbContext<BancoContext>(options =>
 options.UseSqlServer(connectionString));
 
-
-
 var app = builder.Build();
 
 

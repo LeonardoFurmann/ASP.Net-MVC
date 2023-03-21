@@ -11,6 +11,11 @@ namespace ControleContatos.Repositorio
             _bancoContext = bancoContext;
         }
 
+        public ContatoModel BuscarPorId(int id)
+        {
+            return _bancoContext.Contatos.FirstOrDefault(x => x.Id == id);
+        }
+
         public List<ContatoModel> BuscarTodos()
         {
             return _bancoContext.Contatos.ToList();
@@ -23,6 +28,33 @@ namespace ControleContatos.Repositorio
             return contato;
         }
 
-       
+        public ContatoModel Atualizar(ContatoModel contato)
+        {
+            ContatoModel contatoDB = BuscarPorId(contato.Id);
+
+            if (contatoDB == null) throw new Exception("Houve um erro na atulização do contato");
+
+            contatoDB.Nome = contato.Nome;
+            contatoDB.Email = contato.Email;
+            contatoDB.Telefone = contato.Telefone;
+
+            _bancoContext.Contatos.Update(contatoDB);
+            _bancoContext.SaveChanges();
+
+            return contatoDB;
+        }
+
+        public bool Apagar(int id)
+        {
+            ContatoModel contatoDB = BuscarPorId(id);
+
+            if (contatoDB == null) throw new Exception("Houve um erro na deleção do contato");
+
+            _bancoContext.Contatos.Remove(contatoDB);
+            _bancoContext.SaveChanges();
+
+            return true;
+
+        }
     }
 }

@@ -26,14 +26,22 @@ namespace ControleContatos.Controllers
             return View();
         }
 
-        public IActionResult EditarContato()
+        public IActionResult EditarContato(int id)
         {
-            return View();
+            ContatoModel contato = _contatoRepostorio.BuscarPorId(id);
+            return View(contato);
         }
 
-        public IActionResult ApagarConfirmacao()
+        public IActionResult ApagarConfirmacao(int id)
         {
-            return View();
+            ContatoModel contato = _contatoRepostorio.BuscarPorId(id);
+            return View(contato);
+        }
+
+        public IActionResult ApagarContato(int id)
+        {
+            _contatoRepostorio.Apagar(id);
+            return RedirectToAction("index");
         }
 
         // Métodos Post
@@ -44,5 +52,14 @@ namespace ControleContatos.Controllers
             _contatoRepostorio.Adicionar(contato);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult EditarContato(ContatoModel contato)
+        {
+            _contatoRepostorio.Atualizar(contato);
+            return RedirectToAction("Index");
+        }
+
+       
     }
 }
